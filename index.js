@@ -1,7 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocs = require('./swagger.json')
 require('dotenv').config()
+
 //dbdate
 const dbUSER = process.env.dbUSER
 const dbPASSWORD = encodeURIComponent(process.env.dbPASSWORD)
@@ -17,8 +20,10 @@ const productRoutes = require('./routes/productRoutes')
 app.use('/product', productRoutes)
 //start route / endpoint
 app.get('/',(req ,res)=>{
-    res.json({message: 'Hello, gymbro!'})
+    res.json({message: 'Hello! Try change something...'})
 })
+app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+
 //mongodb+srv://Elian:128570@apicluster0.jbe4noi.mongodb.net/API?retryWrites=true&w=majority
 
 //gived door

@@ -1,0 +1,209 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Product Control API",
+        "description": "This API aims to make a CRUD of products",
+        "contact":{
+            "email":"elianfernandosc@gmail.com"
+        },
+        "version":"1.0.0"
+    },
+    "servers":[
+        {
+            "url":"http://localhost:3000/",
+            "description":"Start Page"
+        }
+    ],
+    "paths":{
+        "/product/":{
+            "post":{
+                "sumary": "Create Product",
+                "description" : "Route to save a new product",
+                "tag":["products"],
+                "requestBody" : {
+                    "content":{
+                        "app/jason":{
+                            "schema":{
+                                "$ref":"#/components/schemas/product" 
+                            },
+                            "examples":{
+                                "ProductX":{
+                                    "value":{
+                                        "description":"Grape Juice",
+                                        "price":12.99,
+                                        "amount":100,
+                                        "available":true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },"responses":{
+                    "500":{
+                        "description": "Failed to post"
+                    },
+                    "200":{
+                        "description": "Operation made with sucess",
+                        "content":{
+                            "app/jason":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/product"
+                                }
+                            }
+                        }
+                    },
+                    "201":{
+                        "description":"Product saved with sucess",
+                        "content":{
+                            "app/jason":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/product"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "description":"Route to view a product",
+                "sumary":"Find Product",
+                "tag":["products"],
+                "parameters":[
+                    {
+                        "name":"description",
+                        "in":"query",
+                        "description":"All Products",
+                        "required":false
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Operation made with sucess",
+                        "content":{
+                            "app/js":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/product"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/{id}":{
+            "get":{
+                "description":"Route to view a product by id",
+                "sumary":"Find Product by id",
+                "tag":["products"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"Find by id",
+                        "required":true
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Operation made with sucess",
+                        "content":{
+                            "app/jason":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/product"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "description":"Change Infos by id",
+                "sumary":"Change Infos by id",
+                "tag":["products"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"Find by id",
+                        "required":true
+                    }
+                ],
+                "requestBody" : {
+                    "content":{
+                        "app/js":{
+                            "schema":{
+                                "$ref":"#/components/schemas/product" 
+                            },
+                            "examples":{
+                                "ProductX":{
+                                    "value":{
+                                        "description":"Grape Juice",
+                                        "price":12.99,
+                                        "amount":100,
+                                        "available":true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description": "Operation made with sucess",
+                        "content":{
+                            "app/js":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/product"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "description":"Delete product by id",
+                "sumary":"Delete product ct by id",
+                "tag":["products"],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"Find by id",
+                        "required":true
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Operation made with sucess",
+                        "content":{
+                            "app/jason":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/product"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components":{
+        "schemas":{
+            "product":{
+                "type":"object",
+                "properties":{
+                    "description": {"type":"String"},
+                    "price": {"type":"Number"},
+                    "amount": {"type":"Number"},
+                    "available": {"type":"Boolean"}
+                }
+            }
+        }
+    }
+}
