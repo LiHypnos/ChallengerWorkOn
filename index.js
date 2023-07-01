@@ -24,8 +24,6 @@ app.get('/',(req ,res)=>{
 })
 app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-//mongodb+srv://Elian:128570@apicluster0.jbe4noi.mongodb.net/API?retryWrites=true&w=majority
-
 //gived door
 mongoose.connect(
     `mongodb+srv://${dbUSER}:${dbPASSWORD}@apicluster0.jbe4noi.mongodb.net/API?retryWrites=true&w=majority`,
